@@ -1,0 +1,211 @@
+{
+  "$schema": "../../../../scripts/store-import/fixture.schema.json",
+  "meta": {
+    "sample": true,
+    "store": "bangla-cafe-and-bar",
+    "currency": "BDT",
+    "note": "SAMPLE / PREVIEW DATA. Curated artisan cafe menu with specialty brews, bakery treats, and signature Bengali kitchen dishes."
+  },
+  "categories": [
+    { "slug": "coffee-and-drinks", "name": "Coffee & Drinks", "description": "Single-origin espresso, cold brews, and house blends.", "displayOrder": 1 },
+    { "slug": "treats-and-bakery", "name": "Treats & Bakery", "description": "Freshly baked pastries, cheesecakes, and artisanal cookies.", "displayOrder": 2 },
+    { "slug": "starters", "name": "Starters & Small Plates", "description": "Charcoal grilled skewers and crisp small plates.", "displayOrder": 3 },
+    { "slug": "mains", "name": "Bengali Kitchen Mains", "description": "Slow-cooked bhunas, curries, and house specialties.", "displayOrder": 4 },
+    { "slug": "rice-and-biryani", "name": "Rice & Biryani", "description": "Aromatic sealed pot slow-cooked rice dishes.", "displayOrder": 5 },
+    { "slug": "breads", "name": "Fresh Breads", "description": "Soft tandoor-baked flatbreads and naans.", "displayOrder": 6 }
+  ],
+  "collections": [
+    { "slug": "featured", "name": "Featured", "featured": true, "displayOrder": 0 },
+    { "slug": "treats", "name": "Recommended Treats", "featured": true, "displayOrder": 1 },
+    { "slug": "offers", "name": "Special Offers", "featured": false, "displayOrder": 2 },
+    { "slug": "add-ons", "name": "Add-ons", "featured": false, "displayOrder": 3 }
+  ],
+  "products": [
+    {
+      "slug": "caramel-latte",
+      "name": "Artisan Caramel Latte",
+      "description": "Rich double espresso, steamed silky whole milk, topped with handcrafted golden caramel drizzle.",
+      "category": "coffee-and-drinks",
+      "priceBdt": 380,
+      "tags": ["veg", "chefs-pick"],
+      "collections": ["featured"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80", "alt": "Artisan Caramel Latte" }],
+      "options": [
+        {
+          "code": "size",
+          "name": "Size",
+          "values": [
+            { "code": "regular", "label": "Regular (12oz)", "priceDeltaBdt": 0 },
+            { "code": "large", "label": "Large (16oz)", "priceDeltaBdt": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "cappuccino",
+      "name": "Classic Cappuccino",
+      "description": "Bold dark roast espresso with dense velvety microfoam, lightly dusted with Valrhona cocoa.",
+      "category": "coffee-and-drinks",
+      "priceBdt": 340,
+      "tags": ["veg"],
+      "collections": ["featured"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80", "alt": "Classic Cappuccino" }]
+    },
+    {
+      "slug": "matcha-latte",
+      "name": "Ceremonial Matcha Latte",
+      "description": "Single-estate ceremonial Uji matcha whisked with silky steamed milk and subtle vanilla sweetness.",
+      "category": "coffee-and-drinks",
+      "priceBdt": 450,
+      "compareAtBdt": 490,
+      "tags": ["veg", "chefs-pick"],
+      "collections": ["featured", "offers"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80", "alt": "Ceremonial Matcha Latte" }]
+    },
+    {
+      "slug": "signature-cold-brew",
+      "name": "Single Origin Cold Brew",
+      "description": "18-hour slow-steeped Ethiopian specialty beans, poured over clear ice for a smooth, chocolatey finish.",
+      "category": "coffee-and-drinks",
+      "priceBdt": 360,
+      "tags": ["veg"],
+      "collections": ["featured"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80", "alt": "Single Origin Cold Brew" }]
+    },
+    {
+      "slug": "almond-croissant",
+      "name": "Almond Croissant",
+      "description": "Freshly baked flaky buttery croissant filled with rich almond frangipane and toasted flakes.",
+      "category": "treats-and-bakery",
+      "priceBdt": 290,
+      "tags": ["veg", "chefs-pick"],
+      "collections": ["featured", "treats"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80", "alt": "Almond Croissant" }]
+    },
+    {
+      "slug": "berry-cheesecake",
+      "name": "Wild Berry Cheesecake",
+      "description": "Creamy New York cheesecake on a buttery biscuit base, crowned with seasonal wild berry compote.",
+      "category": "treats-and-bakery",
+      "priceBdt": 420,
+      "tags": ["veg"],
+      "collections": ["treats"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80", "alt": "Wild Berry Cheesecake" }]
+    },
+    {
+      "slug": "chocolate-chunk-cookie",
+      "name": "Dark Chocolate Chunk Cookie",
+      "description": "Soft-centred cookie packed with Belgian dark chocolate chunks and finished with Maldon sea salt flakes.",
+      "category": "treats-and-bakery",
+      "priceBdt": 220,
+      "tags": ["veg"],
+      "collections": ["treats"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80", "alt": "Dark Chocolate Cookie" }]
+    },
+    {
+      "slug": "sample-beef-bhuna",
+      "name": "Slow-Cooked Beef Bhuna",
+      "description": "Tender beef chuck simmered slowly with mustard oil, roasted cumin, and caramelized shallots.",
+      "category": "mains",
+      "priceBdt": 460,
+      "tags": ["non-veg", "spicy", "chefs-pick"],
+      "collections": ["featured"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80", "alt": "Beef Bhuna" }],
+      "options": [
+        {
+          "code": "spice",
+          "name": "Spice level",
+          "values": [
+            { "code": "mild", "label": "Mild", "priceDeltaBdt": 0 },
+            { "code": "medium", "label": "Medium", "priceDeltaBdt": 0 },
+            { "code": "hot", "label": "Hot", "priceDeltaBdt": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sample-mutton-biryani",
+      "name": "Kacchi Mutton Biryani",
+      "description": "Fragrant Chinigura rice and marinated tender mutton slow-steeped in a dough-sealed pot with saffron and potatoes.",
+      "category": "rice-and-biryani",
+      "priceBdt": 520,
+      "tags": ["non-veg", "chefs-pick"],
+      "collections": ["featured"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80", "alt": "Kacchi Mutton Biryani" }],
+      "options": [
+        {
+          "code": "size",
+          "name": "Portion",
+          "values": [
+            { "code": "regular", "label": "Single portion", "priceDeltaBdt": 0 },
+            { "code": "family", "label": "Family sharing (serves 3)", "priceDeltaBdt": 750 }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sample-chicken-skewers",
+      "name": "Charcoal Chicken Skewers",
+      "description": "Boneless chicken marinated in hung curd, ginger, and Bengali panch phoron, charred over charcoal.",
+      "category": "starters",
+      "priceBdt": 290,
+      "tags": ["non-veg"],
+      "collections": [],
+      "images": [{ "src": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80", "alt": "Chicken Skewers" }]
+    },
+    {
+      "slug": "sample-lentil-fritters",
+      "name": "Peyaju (Crisp Lentil Fritters)",
+      "description": "Crunchy red lentil fritters spiced with green chillies, coriander, and served with tangy tamarind dip.",
+      "category": "starters",
+      "priceBdt": 180,
+      "tags": ["veg", "spicy"],
+      "collections": [],
+      "images": [{ "src": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80", "alt": "Peyaju Lentil Fritters" }]
+    },
+    {
+      "slug": "sample-vegetable-korma",
+      "name": "Seasonal Vegetable Korma",
+      "description": "Garden vegetables gently poached in a creamy cashew and coconut milk sauce with aromatic cardamom.",
+      "category": "mains",
+      "priceBdt": 340,
+      "compareAtBdt": 380,
+      "tags": ["veg"],
+      "collections": ["offers"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=800&q=80", "alt": "Vegetable Korma" }]
+    },
+    {
+      "slug": "sample-plain-naan",
+      "name": "Garlic Butter Tandoori Naan",
+      "description": "Leavened tandoor flatbread brushed with crushed roasted garlic and pure clarified butter (ghee).",
+      "category": "breads",
+      "priceBdt": 85,
+      "tags": ["veg"],
+      "collections": ["add-ons"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&w=800&q=80", "alt": "Garlic Butter Naan" }]
+    },
+    {
+      "slug": "sample-lime-soda",
+      "name": "Fresh Mint Lime Soda",
+      "description": "Freshly squeezed Kagoji lime, garden mint, cane sugar, and sparkling soda water over crushed ice.",
+      "category": "coffee-and-drinks",
+      "priceBdt": 140,
+      "tags": ["veg"],
+      "collections": ["add-ons"],
+      "images": [{ "src": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80", "alt": "Mint Lime Soda" }]
+    },
+    {
+      "slug": "sample-mishti-doi",
+      "name": "Gazipur TOK DOI",
+      "description": "Traditional artisanal sour curd (tok doi) from Gazipur, naturally fermented in earthen pots for a rich and wholesome tang.",
+      "category": "treats-and-bakery",
+      "priceBdt": 120,
+      "tags": ["veg"],
+      "collections": ["treats"],
+      "images": [
+        { "src": "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80", "alt": "Gazipur TOK DOI earthen pot" },
+        { "src": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80", "alt": "Fresh artisanal yogurt bowl" }
+      ]
+    }
+  ]
+}

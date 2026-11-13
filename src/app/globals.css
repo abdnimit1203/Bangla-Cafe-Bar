@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Warm cream canvas, dark brown ink, muted sage/forest greens
+ * for sections and food indicators, warm orange for primary actions, gold for
+ * prices. Neumorphic shadows are tuned for the cream background; the *-dark
+ * variants are for forest-green / brown sections.
+ */
+@theme {
+  --color-canvas: #f6f3ed;
+  --color-surface: #faf7f0;
+  --color-surface-strong: #ffffff;
+  --color-cream: #f7f1e6;
+  --color-sand: #ecdcc8;
+  --color-sand-deep: #dbc2a3;
+
+  --color-ink: #221c17;
+  --color-ink-muted: #61564c;
+  --color-ink-faint: #918476;
+  --color-line: #e6ddce;
+
+  --color-orange: #d97724;
+  --color-orange-deep: #bd5e14;
+  --color-orange-soft: #fdeee0;
+
+  --color-caramel: #cb6b20;
+  --color-caramel-deep: #a85210;
+  --color-caramel-soft: #faedd9;
+
+  --color-gold: #b8862b;
+  --color-gold-deep: #96691c;
+  --color-gold-soft: #f4e7c7;
+
+  --color-sage: #6b8871;
+  --color-sage-soft: #e2ebe3;
+  --color-matcha: #597a61;
+  --color-matcha-deep: #385540;
+  --color-matcha-soft: #e3ede5;
+  --color-matcha-light: #f2f7f3;
+
+  --color-forest: #233e2b;
+  --color-forest-deep: #162a1c;
+  --color-green: #486a4e;
+
+  --color-success: #3f7a4e;
+  --color-success-soft: #e3efe3;
+  --color-danger: #b83a2a;
+  --color-danger-soft: #f8e2dd;
+  --color-warning: #a8651c;
+  --color-warning-soft: #f9ebd3;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  --shadow-soft: 12px 12px 28px rgba(85, 70, 55, 0.12), -10px -10px 24px rgba(255, 255, 255, 0.95);
+  --shadow-soft-sm: 6px 6px 16px rgba(85, 70, 55, 0.10), -6px -6px 14px rgba(255, 255, 255, 0.95);
+  --shadow-soft-xs: 3px 3px 8px rgba(85, 70, 55, 0.08), -3px -3px 8px rgba(255, 255, 255, 0.95);
+  --shadow-inset: inset 3px 3px 7px rgba(85, 70, 55, 0.12), inset -3px -3px 7px rgba(255, 255, 255, 0.9);
+  --shadow-soft-dark: 12px 12px 28px rgba(0, 0, 0, 0.4), -6px -6px 18px rgba(255, 255, 255, 0.07);
+  --shadow-soft-dark-sm: 6px 6px 14px rgba(0, 0, 0, 0.35), -3px -3px 10px rgba(255, 255, 255, 0.07);
+  --shadow-inset-dark: inset 3px 3px 8px rgba(0, 0, 0, 0.4), inset -3px -3px 8px rgba(255, 255, 255, 0.07);
+  --shadow-glow-orange: 0 10px 25px -4px rgba(217, 119, 36, 0.35);
+  --shadow-glow-sage: 0 12px 28px -4px rgba(89, 122, 97, 0.32);
+
+  --radius-card: 1.5rem;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-serif);
+}
+
+/* Hide scrollbars on horizontal chip rows without removing scrollability. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Organic blob behind food imagery (see reference designs). */
+.blob {
+  border-radius: 58% 42% 55% 45% / 48% 55% 45% 52%;
+}
+
+/* Tactile press for buttons and chips. */
+.press {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+.press:active {
+  transform: scale(0.98);
+}
+
+/* Section Gradients inspired by reference designs */
+.bg-gradient-hero {
+  background: linear-gradient(135deg, #fbf7f0 0%, #edf4ec 50%, #f7efe4 100%);
+}
+
+.bg-gradient-matcha {
+  background: linear-gradient(135deg, #53755b 0%, #3a5742 100%);
+}
+
+.bg-gradient-caramel {
+  background: linear-gradient(125deg, #f7ece0 0%, #fef8f2 50%, #eedbc7 100%);
+}
+
+.bg-gradient-forest-dark {
+  background: linear-gradient(145deg, #1b3524 0%, #102116 100%);
+}
+
+.shadow-glow-warm {
+  box-shadow: 0 12px 30px -6px rgba(217, 119, 36, 0.28);
+}
+
+.shadow-glow-matcha {
+  box-shadow: 0 12px 30px -6px rgba(89, 122, 97, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press,
+  .press:active {
+    transition: none;
+    transform: none;
+  }
+}

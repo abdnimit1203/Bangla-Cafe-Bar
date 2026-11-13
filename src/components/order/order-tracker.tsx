@@ -24,6 +24,8 @@ import {
 import { restaurantConfig } from "@/lib/config/restaurant";
 import { formatDateTime } from "@/lib/utils/dates";
 import { cn } from "@/lib/utils/cn";
+import { QRCodeSvg } from "@/components/ui/qr-code";
+import { PassActions } from "@/components/ui/pass-actions";
 
 class NoAccessError extends Error {}
 
@@ -181,6 +183,7 @@ export function OrderTracker({ orderNumber }: { orderNumber: string }) {
             </dd>
           </div>
         </dl>
+
         <div className="mt-5 space-y-2 text-sm text-ink-muted">
           <p className="flex items-center gap-2">
             <Icon name="receipt" size={16} className="text-gold" />
@@ -196,6 +199,35 @@ export function OrderTracker({ orderNumber }: { orderNumber: string }) {
             <Icon name="phone" size={16} className="text-gold" />
             {restaurantConfig.phone}
           </p>
+        </div>
+
+        {/* Official QR Code & Receipt Actions */}
+        <div className="mt-6 border-t border-line/70 pt-5">
+          <div className="flex items-center gap-4 rounded-2xl bg-surface p-3.5 shadow-inset">
+            <QRCodeSvg value={`BCB-ORDER:${order.orderNumber}`} size={84} />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-forest">Order QR Proof</p>
+              <p className="mt-1 text-xs text-ink-muted">Scan to verify pickup, delivery, or counter payment.</p>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <PassActions
+              details={{
+                type: "order",
+                referenceNumber: `Order ${order.orderNumber}`,
+                title: "Official Order Receipt",
+                status: statusLabel(order.status),
+                fields: [
+                  { label: "Date", value: formatDateTime(order.createdAt) },
+                  { label: "Payment", value: paymentTermLabel(order.paymentTerm) },
+                  { label: "Grand Total", value: `৳${(order.totals.grandTotal.amount / 100).toFixed(2)}` },
+                  { label: "Phone", value: restaurantConfig.phone },
+                ],
+                qrValue: `BCB-ORDER:${order.orderNumber}`,
+              }}
+            />
+          </div>
         </div>
       </Card>
     </div>

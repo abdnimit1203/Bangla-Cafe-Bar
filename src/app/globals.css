@@ -70,6 +70,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbars universally for clean horizontal carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -147,10 +158,37 @@ h3,
   box-shadow: 0 12px 30px -6px rgba(89, 122, 97, 0.28);
 }
 
+/* Hide scrollbars universally for clean horizontal carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .press,
   .press:active {
     transition: none;
     transform: none;
+  }
+}
+
+/* Print Isolation: When printing the page, hide global navigation, footers, and buttons */
+@media print {
+  header,
+  footer,
+  nav,
+  aside,
+  button,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
   }
 }

@@ -41,7 +41,7 @@ export function ProductCard({
               alt={image?.alt ?? product.name}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-105 "
             />
           ) : (
             <span className="flex h-full w-full items-center justify-center text-forest/40">
@@ -61,7 +61,7 @@ export function ProductCard({
             </Link>
           </h3>
           {product.description && (
-            <p className="mt-1 line-clamp-2 text-xs text-ink-muted">{product.description}</p>
+            <p className="mt-1 line-clamp-2 text-sm text-ink-muted">{product.description}</p>
           )}
           <div className="mt-auto flex items-center justify-between pt-3">
             {range ? (
@@ -86,16 +86,16 @@ export function ProductCard({
     return (
       <article className="press group flex w-full flex-col rounded-3xl bg-surface-strong p-5 text-center shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-sm">
         <Link href={href} className="relative mx-auto flex aspect-square w-36 items-center justify-center sm:w-44" aria-label={product.name}>
-          {/* Organic circular badge behind drink (Image 1 style) */}
-          <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-sage-soft/80 to-cream transition-transform duration-500 group-hover:scale-110" />
+          {/* Organic circular aura/halo behind drink (Image 1 style) */}
+          <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-sage-soft/70 via-cream to-amber-100/60 shadow-inner transition-transform duration-500 group-hover:scale-105" />
           {src ? (
-            <div className="relative h-28 w-28 sm:h-36 sm:w-36">
+            <div className="relative aspect-square w-28 overflow-hidden rounded-full border-2 border-white/90 shadow-md transition-transform duration-500 group-hover:scale-110 sm:w-36">
               <Image
                 src={src}
                 alt={image?.alt ?? product.name}
                 fill
                 sizes="(min-width: 1024px) 20vw, 40vw"
-                className="object-contain drop-shadow-md transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
             </div>
           ) : (

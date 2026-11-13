@@ -21,6 +21,7 @@ export interface StoredReservationAccess {
   reservationNumber: string;
   startsAt: string;
   createdAt: string;
+  snapshot?: unknown;
 }
 
 import { restaurantConfig } from "@/lib/config/restaurant";

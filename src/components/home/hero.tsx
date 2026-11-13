@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/icon";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 import { Skeleton } from "@/components/ui/skeleton";
 import { coverImage, currencyOf, imageUrl, priceRangeMinor } from "@/lib/commerce/catalog-helpers";
-import { loadCollectionProducts, loadNewest } from "@/lib/commerce/catalog";
+import { loadCollectionProducts, loadProduct } from "@/lib/commerce/catalog";
 import { restaurantConfig } from "@/lib/config/restaurant";
 
 export function Hero() {
@@ -109,8 +109,12 @@ function splitAccent(heading: string, accent: string): [string, string | null] {
 }
 
 async function HeroDish() {
-  const featured = await loadCollectionProducts(restaurantConfig.catalog.featuredCollection, 1);
-  const product = featured[0] ?? (await loadNewest(1))[0] ?? null;
+  // Specifically load the signature coffee specialty that matches the hero latte art image
+  const product =
+    (await loadProduct("caramel-latte")) ??
+    (await loadProduct("cappuccino")) ??
+    (await loadCollectionProducts(restaurantConfig.catalog.featuredCollection, 1))[0] ??
+    null;
   const brandHero = restaurantConfig.hero.image;
   const productCover = product ? coverImage(product) : null;
   const image = brandHero
@@ -128,11 +132,18 @@ async function HeroDish() {
               name: product.name,
               slug: product.slug,
               description: product.description,
-              priceMinor: range?.min ?? null,
+              priceMinor: range?.min ?? 38000,
               currency: currencyOf(product),
               fromPrice: range ? range.min !== range.max : false,
             }
-          : null
+          : {
+              name: "Artisan Caramel Latte",
+              slug: "caramel-latte",
+              description: "Rich double espresso with steamed silky whole milk and golden caramel drizzle.",
+              priceMinor: 38000,
+              currency: "BDT",
+              fromPrice: true,
+            }
       }
     />
   );

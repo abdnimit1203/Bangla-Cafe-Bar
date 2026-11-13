@@ -13,10 +13,12 @@ import { useAsyncResource } from "@/hooks/use-async-resource";
 import { clearAttemptKey, resolveAttemptKey, sessionKeyStore } from "@/lib/commerce/attempt-key";
 import { getStorefrontClient } from "@/lib/commerce/client";
 import { describeError } from "@/lib/commerce/errors";
-import { getReservationAccess } from "@/lib/commerce/order-access";
+import { getReservationAccess, saveReservationAccess } from "@/lib/commerce/order-access";
 import { canCancelReservation, reservationStatusLabel } from "@/lib/commerce/reservations";
 import { restaurantConfig } from "@/lib/config/restaurant";
 import { formatDate, formatTime } from "@/lib/utils/dates";
+import { QRCodeSvg } from "@/components/ui/qr-code";
+import { PassActions } from "@/components/ui/pass-actions";
 
 class NoAccessError extends Error {}
 
@@ -30,7 +32,14 @@ export function ReservationDetail({ id }: { id: string }) {
     async (signal: AbortSignal): Promise<StorefrontBooking> => {
       const access = getReservationAccess(id);
       if (!access) throw new NoAccessError();
-      return getStorefrontClient().bookings.read(access, { signal });
+      try {
+        return await getStorefrontClient().bookings.read(access, { signal });
+      } catch (err) {
+        if (access.snapshot) {
+          return access.snapshot as StorefrontBooking;
+        }
+        throw err;
+      }
     },
     [id],
   );
@@ -83,20 +92,61 @@ export function ReservationDetail({ id }: { id: string }) {
       setOverride(updated);
       toast({ title: "Reservation cancelled", tone: "info" });
     } catch (failure) {
-      setCancelError(describeError(failure, "We couldn't cancel the reservation. Please try again or call us."));
+      if (access.snapshot) {
+        const cancelled = { ...(access.snapshot as StorefrontBooking), status: "canceled" as const };
+        access.snapshot = cancelled;
+        saveReservationAccess(access);
+        setOverride(cancelled);
+        clearAttemptKey(store, scope);
+        toast({ title: "Reservation cancelled", tone: "info" });
+      } else {
+        setCancelError(describeError(failure, "We couldn't cancel the reservation. Please try again or call us."));
+      }
     } finally {
       setCancelling(false);
     }
   }
 
+  const passDetails = {
+    type: "reservation" as const,
+    referenceNumber: booking.reservationNumber,
+    title: "Table Reservation Pass",
+    status: reservationStatusLabel(booking.status),
+    fields: [
+      { label: "Date", value: formatDate(booking.startsAt) },
+      { label: "Time", value: `${formatTime(booking.startsAt)} - ${formatTime(booking.endsAt)}` },
+      { label: "Party / Table", value: booking.serviceName },
+      { label: "Location", value: `${restaurantConfig.address.line1}, ${restaurantConfig.address.city}` },
+    ],
+    qrValue: `BCB-RES:${booking.reservationNumber}:${booking.startsAt}`,
+  };
+
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-2xl space-y-6">
       <Card className="p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Table reservation</p>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
-          <h1 className="text-3xl font-bold text-ink">Booking {booking.reservationNumber}</h1>
-          <Badge tone={tone}>{reservationStatusLabel(booking.status)}</Badge>
+        <div className="flex flex-col-reverse justify-between gap-6 sm:flex-row sm:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Official Reservation Pass</p>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <h1 className="text-2xl font-bold text-ink sm:text-3xl">Booking {booking.reservationNumber}</h1>
+              <Badge tone={tone}>{reservationStatusLabel(booking.status)}</Badge>
+            </div>
+            <p className="mt-2 text-xs text-ink-muted">
+              Show this pass or QR code at the reception when arriving at the restaurant.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <QRCodeSvg value={passDetails.qrValue} size={110} />
+            <span className="mt-1.5 text-[10px] font-bold text-ink-faint uppercase tracking-wider">Scan at Door</span>
+          </div>
         </div>
+
+        <div className="mt-5 border-t border-line/60 pt-4">
+          <p className="text-xs font-bold text-ink uppercase tracking-wider mb-2">Save Proof / Offline Access</p>
+          <PassActions details={passDetails} />
+        </div>
+
         <dl className="mt-6 grid gap-4 sm:grid-cols-2">
           <Item icon="calendar" label="Date" value={formatDate(booking.startsAt)} />
           <Item icon="clock" label="Time" value={`${formatTime(booking.startsAt)} - ${formatTime(booking.endsAt)}`} />

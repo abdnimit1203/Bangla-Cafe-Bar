@@ -14,11 +14,20 @@ Designed with a warm cafe aesthetic combining soft neumorphic surfaces, atmosphe
   - Interactive floating micro-animations (coffee beans, leaves, plates) via **Framer Motion**.
   - Left-aligned animated mobile hamburger drawer with table reservation quick-link.
   - Global slide-over **Order Tray** sidebar accessible across all devices.
-  - Wide-screen adaptive grid layout (up to `1340px`).
-- **📅 Table Reservations**: Dedicated booking system for party sizes, slots, and special requests.
+  - Wide-screen adaptive grid layout (up to `1340px`) with custom no-scrollbar carousels.
+  - Handcrafted signature beverage cards with circular photography frames and ambient backdrops.
+- **📅 Table Reservation & Dining Engine**:
+  - Interactive guest count selector (`1`–`8` guests) with 1.2x enlarged warm active tabs.
+  - Dynamic date & dining time slot picker with live availability checking.
+  - Direct integration with Brihot booking engine (`@spinekit/reservation`) and graceful local offline fallback.
+- **📄 Downloadable Receipts & Scannable QR Passes**:
+  - **Direct PDF Download**: Single-page official reservation pass & order receipt generated client-side via **jsPDF**.
+  - **PNG Pass Download**: High-resolution branded canvas receipt pass.
+  - **Isolated Slip Print**: Dedicated iframe printer that prints *only* the official receipt slip, completely omitting webpage headers, navigation, footers, and buttons.
+  - **Dynamic QR Codes**: Generated using `qrcode` for instant check-in at the counter or restaurant door.
 - **⚡ Next.js 16 & Turbopack Ready**:
   - Full Partial Prerendering (PPR) and static route caching.
-  - Ultra-fast build times and zero runtime hydration issues.
+  - Ultra-fast compilation times and zero runtime hydration issues.
 - **🛒 Dynamic Cart & Checkout**:
   - Client state managed with **Zustand** (with `localStorage` persistence).
   - Multi-attribute variant price calculators in minor currency units (`BDT`).
@@ -38,6 +47,8 @@ Designed with a warm cafe aesthetic combining soft neumorphic surfaces, atmosphe
 | **Framer Motion 14** | Smooth transitions, slide-over sheets, floating elements |
 | **@classytic/commerce-client** | Brihot Commerce SDK (Storefront & Management) |
 | **@classytic/primitives** | Standardized money and currency primitives |
+| **jsPDF 4** | Client-side 1-page PDF receipt generation |
+| **qrcode** | Dynamic vector & canvas QR code generation |
 | **Zustand 5** | Lightweight reactive cart and UI drawer store |
 | **Vitest 5** | Unit and integration test suite |
 
@@ -125,16 +136,17 @@ bangla-cafe-and-bar/
 ├── src/
 │   ├── app/                      # Next.js App Router pages
 │   │   ├── (storefront)/         # Home, Menu, Dish details, Cart, Checkout
-│   │   ├── reservation/          # Table reservation flow
+│   │   ├── reservation/          # Table reservation flow & pass detail
 │   │   ├── order/                # Order status and lookup
 │   │   ├── layout.tsx            # Root layout with site header & footer
 │   │   └── icon.svg              # Custom cafe brand vector favicon
 │   ├── components/               # UI and feature components
 │   │   ├── cart/                 # Global order tray & slide-over sidebar
-│   │   ├── home/                 # Hero, features, recommended treats, info
+│   │   ├── home/                 # Hero, signature drinks, features, treats
 │   │   ├── layout/               # Site header, mobile navigation, footer
 │   │   ├── menu/                 # Catalog listings and category filters
-│   │   └── ui/                   # Buttons, badges, cards, dialogs
+│   │   ├── reservation/          # Reservation form, flow, and pass details
+│   │   └── ui/                   # QR code, pass actions, buttons, badges, chips
 │   ├── lib/
 │   │   ├── commerce/             # Brihot SDK client, loaders, checkout
 │   │   ├── config/               # Store and restaurant configuration
@@ -145,32 +157,6 @@ bangla-cafe-and-bar/
 │   └── seed-catalog.mjs          # Direct Brihot backend sync script
 ├── .env.local                    # Local environment variables
 └── README.md
-```
-
----
-
-## 🚢 Publishing to GitHub
-
-To push this project to a new repository on your GitHub account:
-
-```bash
-# 1. Initialize git (if not already initialized)
-git init
-
-# 2. Stage all files (sensitive keys in .env.local are ignored by .gitignore)
-git add .
-
-# 3. Commit changes
-git commit -m "feat: complete Bangla Cafe and Bar storefront with Brihot integration"
-
-# 4. Rename default branch to main
-git branch -M main
-
-# 5. Link to your new remote GitHub repository
-git remote add origin https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
-
-# 6. Push to GitHub
-git push -u origin main
 ```
 
 ---

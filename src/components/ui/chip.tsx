@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
 const base =
-  "inline-flex h-10 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-gold";
-const idle = "bg-surface text-ink-muted shadow-soft-sm hover:text-ink";
-const active = "bg-surface text-gold shadow-inset";
+  "inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-orange";
+const idle = "bg-surface text-ink-muted shadow-soft-xs hover:text-ink hover:bg-surface-strong hover:shadow-soft-sm";
+const active = "bg-gradient-to-r from-orange to-orange-deep text-white shadow-glow-warm scale-[1.18] font-bold z-10 border border-orange-deep/20";
 
 export function ChipLink({
   href,

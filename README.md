@@ -63,8 +63,8 @@ Designed with a warm cafe aesthetic combining soft neumorphic surfaces, atmosphe
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/bangla-cafe-and-bar.git
-cd bangla-cafe-and-bar
+git clone https://github.com/abdnimit1203/Bangla-Cafe-Bar.git
+cd Bangla-Cafe-Bar
 
 # Install dependencies
 npm install
@@ -82,7 +82,7 @@ Inside `.env.local`, configure your Brihot connection:
 NEXT_PUBLIC_COMMERCE_API_URL=https://store-api.brihot.com/api/v1
 
 # Your store slug on Brihot
-NEXT_PUBLIC_COMMERCE_STORE=plant-world-bd
+NEXT_PUBLIC_COMMERCE_STORE=your-store-slug
 
 # Catalog Source: "store" (live API) or "fixtures" (local preview JSON)
 NEXT_PUBLIC_CATALOG_SOURCE=store
